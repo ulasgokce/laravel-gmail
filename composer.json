@@ -32,6 +32,12 @@
         "squizlabs/php_codesniffer": "~3.4",
         "orchestra/testbench": "^v4.18.0|^v5.20.0|^v6.25.0|^8.0"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ulasgokce/google-api-php-client.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Dacastro4\\LaravelGmail\\": "src/"
