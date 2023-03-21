@@ -35,7 +35,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/ulasgokce/google-api-php-client.git"
+            "url": "https://github.com/ulasgokce/apiclient.git"
         }
     ],
     "autoload": {
