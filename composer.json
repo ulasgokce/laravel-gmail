@@ -34,16 +34,8 @@
     },
     "repositories": [
         {
-            "type": "package",
-            "package": {
-                "name": "google/apiclient",
-                "version": "1.0",
-                "source": {
-                    "url": "https://github.com/ulasgokce/google-api-php-client.git",
-                    "type": "git",
-                    "reference": "main" 
-                }
-            }
+            "type": "vcs",
+            "url": "https://github.com/ulasgokce/google-api-php-client.git"
         }
     ],
     "autoload": {
