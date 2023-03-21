@@ -404,12 +404,17 @@ trait Replyable
 
 		$this->symfonyEmail
 			->from($this->fromAddress())
-			->to($this->toAddress())
-			->cc($this->returnCopies($this->cc))
-			->bcc($this->returnCopies($this->bcc))
-			->subject($this->subject)
+			->to($this->toAddress());
+		if ($this->returnCopies($this->cc)) {
+			$this->symfonyEmail->cc($this->returnCopies($this->cc));
+		}
+		if ($this->returnCopies($this->cc)) {
+			$this->symfonyEmail->bcc($this->returnCopies($this->bcc));
+		}
+		$this->symfonyEmail->subject($this->subject)
 			->html($this->message)
 			->priority($this->priority);
+
 
 		foreach ($this->attachments as $file) {
 			$this->symfonyEmail->attachFromPath($file);
