@@ -133,7 +133,7 @@ class GmailConnection extends Google_Client
     public function setBothAccessToken($token, $user_id)
     {
         $this->setAccessToken($token);
-        $this->saveAccessToken($token, $user_id);
+        return $this->saveAccessToken($token, $user_id);
     }
 
     /**
@@ -146,13 +146,14 @@ class GmailConnection extends Google_Client
         $config['email'] = $this->emailAddress;
 
         if (!GmailSenderIntegration::where('email', $this->emailAddress)->where('user_id', $user_id)->exists()) {
-            GmailSenderIntegration::create([
+            return GmailSenderIntegration::create([
                 'user_id' => $user_id,
                 'email' => $this->emailAddress,
                 'config' => json_encode($config),
             ]);
 
         }
+        return null;
     }
 
 
@@ -164,7 +165,7 @@ class GmailConnection extends Google_Client
     {
         $user_id = $state;
         $request = Request::capture();
-        $code = (string)$request->input('code', null);
+        $code = (string) $request->input('code', null);
         if (!is_null($code) && !empty($code)) {
             $accessToken = $this->fetchAccessTokenWithAuthCode($code);
             if ($this->haveReadScope()) {
@@ -175,9 +176,8 @@ class GmailConnection extends Google_Client
                 }
             }
 
-            $this->setBothAccessToken($accessToken, $user_id);
+            return $this->setBothAccessToken($accessToken, $user_id);
 
-            return $accessToken;
         } else {
             throw new \Exception('No access token');
         }
@@ -218,7 +218,7 @@ class GmailConnection extends Google_Client
     {
         $integration = GmailSenderIntegration::where('user_id', $user_id)->where('email', $email)->first();
 
-        $this->revokeToken(json_decode($integration->config,true));
+        $this->revokeToken(json_decode($integration->config, true));
     }
 
     /**
