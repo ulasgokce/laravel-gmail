@@ -93,10 +93,15 @@ class GmailConnection extends Google_Client
     public function isAccessTokenExpired($user_id, $email)
     {
         $token = $this->getToken($user_id, $email);
-
-        if ($token) {
-            $this->setAccessToken($token);
+        try {
+            if ($token) {
+                $this->setAccessToken($token);
+            }
+        } catch (Exception $e) {
+            Log::info(json_encode($token))
+            Log::info('Token is invalid')
         }
+    
 
         return parent::isAccessTokenExpired($user_id, $email);
     }
