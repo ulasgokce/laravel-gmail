@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 
+
 class GmailConnection extends Google_Client
 {
     use HasLabels;
@@ -98,8 +99,8 @@ class GmailConnection extends Google_Client
                 $this->setAccessToken($token);
             }
         } catch (Exception $e) {
-            Log::info(json_encode($token))
-            Log::info('Token is invalid')
+            Log::info(json_encode($token));
+            Log::info('Token is invalid');
         }
     
 
